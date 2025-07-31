@@ -1,5 +1,13 @@
 # Persian-poetry
 A comprehensive repository of classical Persian poetry, curated from Ganjoor.net, designed for Natural Language Processing (NLP), machine learning applications, and literary research.
+Persian Classical Poetry Dataset for NLP and ML Research
+This repository offers a curated dataset of classical Persian poetry sourced from Ganjoor.net, intended for research and development in Natural Language Processing (NLP), machine learning, and computational literary analysis.
+
+Features:
+
+- Rich collection of Persian poetry from classical authors
+- Structured and cleaned text optimized for NLP applications
+- Suitable for sentiment analysis, stylometry, language modeling, and semantic
 
 # Persian Poetry Dataset
 
@@ -16,7 +24,7 @@ A comprehensive repository of classical Persian poetry, curated from Ganjoor.net
 
 چند نمونه کاربرد:
 
-- استخراج کلیدواژه‌ها و تم‌های رایج در غزل‌ها
+- مجموعه‌ای غنی از آثار شاعران برجسته‌ی فارسی
 - آموزش مدل GPT کوچک بر روی اشعار حافظ
 - طبقه‌بندی شعرها بر اساس سبک (مثلاً غزل، مثنوی، رباعی)
 
