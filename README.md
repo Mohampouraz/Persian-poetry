@@ -20,3 +20,9 @@ A comprehensive repository of classical Persian poetry, curated from Ganjoor.net
 - آموزش مدل GPT کوچک بر روی اشعار حافظ
 - طبقه‌بندی شعرها بر اساس سبک (مثلاً غزل، مثنوی، رباعی)
 
+
+اطلاعات و اشعار این مجموعه از منابع آزاد زیر جمع‌آوری شده‌اند:
+
+- گنجور: [https://ganjoor.net](https://ganjoor.net)
+
+
