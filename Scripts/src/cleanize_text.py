@@ -13,7 +13,6 @@ def cleanize_text(data):
             # Unicode cleanup
             s = s.replace('ا\u200cست', 'است') \
                  .replace('\u200c ', ' ') \
-                 .replace('\u200c', ' ') \
                  .replace('\ufeff', '') \
                  .replace('\u202a', '') \
                  .replace('\u202b', '') \
