@@ -30,4 +30,10 @@ jobs:
         run: pytest --html=report.html --self-contained-html
         working-directory: Scripts
 
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest-report
+          path: Scripts/report.html
+
 
