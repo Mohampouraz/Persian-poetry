@@ -1,55 +1,69 @@
 def cleanize_text(data):
     """
-    Cleans and standardizes a list of Persian poetic texts for linguistic and metrical analysis.
+    Cleans and standardizes Persian poetic text for linguistic and metrical analysis.
 
-    This function processes each item in the provided list and applies the following operations:
-    - Removes problematic Unicode characters (e.g., zero-width non-joiners, directional marks, BOM)
-    - Normalizes Arabic characters (e.g., transforms 'ي' to 'ی', 'ك' to 'ک')
-    - Replaces special cases like 'ا‌ست' with standard forms like 'است'
-    - Removes punctuation and diacritical marks that interfere with text processing
-    - Standardizes spacing and strips unnecessary whitespace
+    Accepts:
+    - str: a single string input
+    - list: a list of string tokens
 
-    Output: A list of cleaned verses, optimized for downstream analysis such as metrical classification, NLP tasks, or corpus preparation.
+    Performs:
+    - Unicode cleanup
+    - Arabic-to-Persian letter normalization
+    - Punctuation and digit removal
+    - Whitespace normalization
+
+    Returns:
+    - cleaned_tokens: list of cleaned tokens
+    - cleaned_string: joined string from cleaned tokens
     """
 
-    clean_verse = []
-    for item in data:
-        if is isinstance(item, str):
-            print("Non-string item:", item)
-        
-        else:
-            s = item
-            # Text normalization and character replacement
-            s = s.replace('ا\u200cست', 'است')     # Fix form of 'است'
-            s = s.replace('\u200c ', ' ')         # ZWNJ + space
-            s = s.replace('\u200c', ' ')          # Zero-width non-joiner
-            s = s.replace('\ufeff', '')           # BOM character
-            s = s.replace('\u202a', '')           # LRE
-            s = s.replace('\u202b', '')           # RLE
-            s = s.replace('\u202c', '')           # PDF
-            s = s.replace('\u200d', '')           # Zero-width joiner
+    import re
 
-            # Arabic to Persian character normalization
-            s = s.replace('ي', 'ی')
-            s = s.replace('ك', 'ک')
-            s = s.replace('ۀ', 'ه')
+    # Tokenization based on input type
+    if isinstance(data, str):
+        tokens = data.split()
+    elif isinstance(data, list):
+        tokens = data
+    else:
+        raise ValueError("Input must be a string or list of strings")
 
-            # Remove punctuation and extraneous symbols
-            for ch in ['،', ':', 'ّ', 'َ', 'ُ', 'ِ', 'ً', 'ٌ', 'ٍ',
-                    '!', '?', '؟', 'ٔ', '«', '»', '؛', ')', '(', 'ـ',
-                    '+', '-', '*']:
-                s = s.replace(ch, '')
+    clean_tokens = []
+    for token in tokens:
+        if not isinstance(token, str):
+            continue  # Skip non-string tokens
 
-            # Remove digits (English and Persian)
-            s = ''.join(ch for ch in s if not ch.isdigit())  # Removes 0-9
-            for num in ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']:
-                s = s.replace(num, '')
+        s = token
 
-            # Final whitespace normalization
-            s = ' '.join(s.split())
-            s = s.strip()
+        # Unicode cleanup
+        s = s.replace('ا\u200cست', 'است')
+        s = s.replace('\u200c ', ' ')
+        s = s.replace('\u200c', ' ')
+        s = s.replace('\ufeff', '')
+        s = s.replace('\u202a', '')
+        s = s.replace('\u202b', '')
+        s = s.replace('\u202c', '')
+        s = s.replace('\u200d', '')
 
-            clean_verse.append(s)
+        # Arabic-to-Persian normalization
+        s = s.replace('ي', 'ی')
+        s = s.replace('ك', 'ک')
+        s = s.replace('ۀ', 'ه')
 
-    return clean_verse
+        # Remove punctuation and symbols
+        s = re.sub(r'[،:ًٌٍَُِّ!?؟ٔ«»؛)(ـ+\-*]', '', s)
 
+        # Remove digits (English & Persian)
+        s = ''.join(ch for ch in s if not ch.isdigit())
+        for pd in '۰۱۲۳۴۵۶۷۸۹':
+            s = s.replace(pd, '')
+
+        # Normalize whitespace
+        s = ' '.join(s.split()).strip()
+
+        if s:
+            clean_tokens.append(s)
+
+    # Join cleaned tokens into a single string
+    cleaned_string = ' '.join(clean_tokens)
+
+    return clean_tokens, cleaned_string
