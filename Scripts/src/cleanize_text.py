@@ -1,37 +1,35 @@
-def cleanize_text(data):
-    try:
-        tokens = data.split() if isinstance(data, str) else list(data)
-    except Exception as e:
-        raise ValueError("Input must be a string or iterable of strings") from e
+def cleanize_tZext(data):
+    import re
+
+    # مرحلهٔ آماده‌سازی داده
+    if isinstance(data, str):
+        tokens = data.split()
+    elif isinstance(data, (list, tuple)):
+        tokens = [str(t) for t in data if isinstance(t, str)]
+    else:
+        raise ValueError("Input must be a string or a list/tuple of strings.")
 
     clean_tokens = []
     for token in tokens:
         try:
-            # اطمینان از رشته بودن و تمیزسازی
-            s = str(token)
+            s = token
 
-            # Unicode cleanup
-            s = s.replace('ا\u200cست', 'است') \
-                 .replace('\u200c ', ' ') \
-                 .replace('\ufeff', '') \
-                 .replace('\u202a', '') \
-                 .replace('\u202b', '') \
-                 .replace('\u202c', '') \
+            # پاکسازی Unicode‌های مزاحم
+            s = s.replace('\u200c', ' ') \
                  .replace('\u200d', '') \
-                 .replace('ي', 'ی') \
-                 .replace('ك', 'ک') \
-                 .replace('ۀ', 'ه')
+                 .replace('\ufeff', '') \
+                 .replace('\u202a', '').replace('\u202b', '').replace('\u202c', '') \
+                 .replace('ي', 'ی').replace('ك', 'ک').replace('ۀ', 'ه')
 
-            import re
+            # حذف علائم و اعداد
             s = re.sub(r'[،:ًٌٍَُِّ!?؟ٔ«»؛)(ـ+\-*]', '', s)
             s = ''.join(ch for ch in s if not ch.isdigit())
             for pd in '۰۱۲۳۴۵۶۷۸۹':
                 s = s.replace(pd, '')
 
-            s = ' '.join(s.split()).strip()
+            s = s.strip()
             if s:
                 clean_tokens.append(s)
-
         except Exception as e:
             print(f"Skipped token due to error: {token} → {e}")
             continue
