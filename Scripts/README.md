@@ -12,6 +12,30 @@ tokens, cleaned = cleanize_text(text)
 
 print("Tokens:", tokens)
 print("Cleaned Text:", cleaned)
-Tokens: ['من', 'از', 'آن', 'روز', 'که', 'در', 'بند', 'توام', 'آزادم']
-Cleaned Text: من از آن روز که در بند توام آزادم
+- Tokens: ['من', 'از', 'آن', 'روز', 'که', 'در', 'بند', 'توام', 'آزادم']
+- Cleaned Text: من از آن روز که در بند توام آزادم
+
+
+
+tokens_input = ['خواب', 'دیدم،', 'که', 'باران', 'می‌بارید!', '۱۲۳']
+tokens, cleaned = cleanize_text(tokens_input)
+
+print("Tokens:", tokens)
+print("Cleaned Text:", cleaned)
+
+- Tokens: ['خواب', 'دیدم', 'که', 'باران', 'می‌بارید']
+- Cleaned Text: خواب دیدم که باران می‌بارید
+
+
+
+noisy_input = [None, 'کجا؟', 42, 'بهار']
+tokens, cleaned = cleanize_text(noisy_input)
+
+print("Tokens:", tokens)
+print("Cleaned Text:", cleaned)
+
+- Tokens: ['کجا', 'بهار']
+- Cleaned Text: کجا بهار
+
+
 
