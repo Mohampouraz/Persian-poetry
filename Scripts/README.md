@@ -10,5 +10,8 @@ from cleanize_text import cleanize_text
 text = "مَن‌ از آن روز که در بندِ توام آزادم؛ ۱۲۳۴۵!"
 tokens, cleaned = cleanize_text(text)
 
-print("🧼 توکن‌ها:", tokens)
-print("📜 متن نهایی:", cleaned)
+print("Tokens:", tokens)
+print("Cleaned Text:", cleaned)
+Tokens: ['من', 'از', 'آن', 'روز', 'که', 'در', 'بند', 'توام', 'آزادم']
+Cleaned Text: من از آن روز که در بند توام آزادم
+
