@@ -1,7 +1,19 @@
-def cleanize_tZext(data):
+def cleanize_text(data):
+    """
+    Cleans and standardizes a list of Persian poetic texts for linguistic and metrical analysis.
+
+    This function processes each item in the provided list and applies the following operations:
+    - Removes problematic Unicode characters (e.g., zero-width non-joiners, directional marks, BOM)
+    - Normalizes Arabic characters (e.g., transforms 'ي' to 'ی', 'ك' to 'ک')
+    - Replaces special cases like 'ا‌ست' with standard forms like 'است'
+    - Removes punctuation and diacritical marks that interfere with text processing
+    - Standardizes spacing and strips unnecessary whitespace
+
+    Output: A list of cleaned verses, optimized for downstream analysis such as metrical classification, NLP tasks, or corpus preparation.
+    """
     import re
 
-    # مرحلهٔ آماده‌سازی داده
+    # Check Data Type...
     if isinstance(data, str):
         tokens = data.split()
     elif isinstance(data, (list, tuple)):
@@ -14,14 +26,14 @@ def cleanize_tZext(data):
         try:
             s = token
 
-            # پاکسازی Unicode‌های مزاحم
+            # Unicode Cleanup...
             s = s.replace('\u200c', ' ') \
                  .replace('\u200d', '') \
                  .replace('\ufeff', '') \
                  .replace('\u202a', '').replace('\u202b', '').replace('\u202c', '') \
                  .replace('ي', 'ی').replace('ك', 'ک').replace('ۀ', 'ه')
 
-            # حذف علائم و اعداد
+            # Digits and Diacritics Cleanup...
             s = re.sub(r'[،:ًٌٍَُِّ!?؟ٔ«»؛)(ـ+\-*]', '', s)
             s = ''.join(ch for ch in s if not ch.isdigit())
             for pd in '۰۱۲۳۴۵۶۷۸۹':
