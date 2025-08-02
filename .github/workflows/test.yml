@@ -1,5 +1,7 @@
 # .github/workflows/test.yml
 
+
+
 name: Run Hello Test
 
 on:
@@ -12,6 +14,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+
+      - name: Set locale to UTF-8
+        run: |
+          sudo apt-get install locales
+          sudo locale-gen fa_IR.UTF-8
+          export LC_ALL=fa_IR.UTF-8
       - name: Checkout Repository
         uses: actions/checkout@v3
 
