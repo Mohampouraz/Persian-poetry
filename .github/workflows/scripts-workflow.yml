@@ -1,0 +1,14 @@
+name: Scripts Workflow
+
+on:
+  push:
+    paths:
+      - 'Scripts/**'
+
+jobs:
+  run-script-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Script Logic
+        run: echo "Running tests or tasks for Scripts/"
