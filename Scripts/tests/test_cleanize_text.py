@@ -5,7 +5,6 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../s
 
 from cleanize_text import cleanize_text
 
-from cleanize_text import cleanize_text
 
 def test_clean_string_input():
     tokens, cleaned = cleanize_text("او‌ست کتابی، ۱۲۳؟")
