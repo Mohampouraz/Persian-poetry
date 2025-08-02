@@ -18,6 +18,7 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: "3.11"
+        path: .
 
     - name: Install dependencies
       run: |
